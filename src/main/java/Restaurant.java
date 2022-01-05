@@ -69,6 +69,13 @@ public class Restaurant {
         return name;
     }
 
-   
+ public int view_order_cost(ArrayList<String> item_list) {
+        int order_sum = 0;
+        for(String selected_item: item_list) {
+            int order_cost = findItemByName(selected_item).getPrice();
+            order_sum = order_sum + order_cost;
+        }
+        return order_sum;
+    }
 
 }
