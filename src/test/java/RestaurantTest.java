@@ -2,11 +2,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class RestaurantTest {
     Restaurant restaurant;
+    List<String> order_list = new ArrayList<>();
     //REFACTOR ALL THE REPEATED LINES OF CODE
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>OPEN/CLOSED<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -74,4 +77,18 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    @Test
+    public void calculating_total_cost_of_selected_items() {
+        order_list.add("Idli");
+        order_list.add("Dosa");
+        order_list.add("Vada");
+        int initial_cost = 100;
+        for(String order: order_list) {
+            restaurant.addToMenu(order, initial_cost);
+            initial_cost = initial_cost + 100;
+        }
+        int total_cost = restaurant.view_order_cost(order_list);
+        assertEquals(600, total_cost);
+    }
 }
